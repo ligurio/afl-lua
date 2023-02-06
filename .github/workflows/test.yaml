@@ -1,0 +1,45 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testing:
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name != github.repository
+    strategy:
+      matrix:
+        LIBLUA:
+          - "5.4"
+          - "5.3"
+          - "5.2"
+          - "5.1"
+      fail-fast: false
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup packages (${{ matrix.LIBLUA }}
+        run: sudo apt install -y lua5.1 liblua5.1-0-dev
+        if: ${{ matrix.LIBLUA == '5.1' }}
+
+      - name: Setup packages (${{ matrix.LIBLUA }}
+        run: sudo apt install -y lua5.2 liblua5.2-dev
+        if: ${{ matrix.LIBLUA == '5.2' }}
+
+      - name: Setup packages (${{ matrix.LIBLUA }}
+        run: sudo apt install -y lua5.3 liblua5.3-dev
+        if: ${{ matrix.LIBLUA == '5.3' }}
+
+      - name: Setup packages (${{ matrix.LIBLUA }}
+        run: sudo apt install -y lua5.4 liblua5.4-dev
+        if: ${{ matrix.LIBLUA == '5.4' }}
+
+      - name: Running CMake
+        run: cmake -S . -B build
+
+      - name: Building
+        run: cmake --build build --parallel $(nproc)
