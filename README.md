@@ -20,6 +20,8 @@ programs written in Lua.
 
 ## Usage
 
+### Fuzzing Lua source code
+
 Create a file with Lua program that reads a string from a STDIN:
 
 ```sh
@@ -67,6 +69,25 @@ After some time, the fuzzer will find a test case with which the program will cr
 $ cat out/default/crashes/id\:000000\,sig\:06\,src\:000008\,time\:197253\,execs\:113636\,op\:havoc\,rep\:4
 luaiiiii^ii
 ```
+
+### Using custom mutators written in Lua
+
+AFL has an [API][aflplus-mutators-url] for implementing custom mutators. Custom
+mutators can be be written in Lua 5.1 (including LuaJIT), 5.2, 5.3 or 5.4.
+
+The environment variable `AFL_CUSTOM_MUTATOR_LIBRARY` must be set to the
+path to the file with shared library `libluamutator.so`.
+
+The environment variable `AFL_CUSTOM_MUTATOR_LUA_SCRIPT` could be set to the
+path with Lua mutator script. The default path is `./afl_mutator.lua`.
+
+```sh
+$ export AFL_CUSTOM_MUTATOR_LIBRARY=$(pwd)/libluamutator.so
+$ export AFL_CUSTOM_MUTATOR_LUA_SCRIPT=$(pwd)/afl_mutator.lua
+$ afl-fuzz /path/to/program
+```
+
+Lua API described in `example_afl_mutator.lua`.
 
 ## License
 

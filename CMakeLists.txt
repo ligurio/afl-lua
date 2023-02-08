@@ -15,6 +15,7 @@ message(STATUS "Found Lua ${LUA_VERSION_STRING}")
 message(STATUS "Found Lua interpreter ${LUA_EXECUTABLE}")
 
 add_subdirectory(afl-lua)
+add_subdirectory(mutator)
 
 if (NOT CMAKE_LUADIR)
   set(CMAKE_LUADIR "${CMAKE_PREFIX_PATH}")
