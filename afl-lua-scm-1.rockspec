@@ -9,7 +9,7 @@ description = {
     summary = "A coverage-guided Lua fuzzer based on with American Fuzzy Lop",
     homepage = "https://github.com/ligurio/afl-lua",
     maintainer = "Sergey Bronnikov <estetus@gmail.com>",
-    license = "ISC",
+    license = "MIT",
 }
 
 dependencies = {
