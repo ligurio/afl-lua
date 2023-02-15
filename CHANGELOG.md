@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+[Unreleased]: https://github.com/ligurio/afl-lua/compare/0.1.0...HEAD
+
+### Added
+
+### Fixed
+
+### Changed
+
+## [0.1.0] - 15.02.2023
+
+[0.1.0]: https://github.com/ligurio/afl-lua/compare/9da5762c...0.1.0
+
 ### Added
 
 - Initial version of integration with AFL.
